@@ -80,7 +80,7 @@ while True:
         length, _, img = detector.findDistance(lmList[8], lmList[12], img)
         x, y = lmList[8]
         # Проверяем что нажал пользователь
-        if length > 60 and delayCounter == 0:   # дистанция пальцев для клика!!!
+        if length < 50 and delayCounter == 0:  # дистанция пальцев для клика!!!
             for i, button in enumerate(buttonList):
                 if button.checkClick(x, y):
                     myValue = buttonListValues[int(i % 4)][int(i / 4)]  # Проверяем какая кнопка была нажата
