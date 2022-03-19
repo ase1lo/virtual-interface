@@ -8,7 +8,7 @@ class Button:
         self.height = height
         self.value = value
 
-    def draw(self, img):
+    def img_show(self, img):
         cv2.rectangle(img, self.pos, (self.pos[0] + self.width, self.pos[1] + self.height),
                       (225, 225, 225), cv2.FILLED)
         cv2.rectangle(img, self.pos, (self.pos[0] + self.width, self.pos[1] + self.height),
@@ -16,7 +16,7 @@ class Button:
         cv2.putText(img, self.value, (self.pos[0] + 30, self.pos[1] + 70), cv2.FONT_HERSHEY_PLAIN,
                     2, (50, 50, 50), 2)
 
-    def checkClick(self, x, y):
+    def clicked(self, x, y):
         if self.pos[0] < x < self.pos[0] + self.width and \
                 self.pos[1] < y < self.pos[1] + self.height:
             cv2.rectangle(img, (self.pos[0] + 3, self.pos[1] + 3),
@@ -70,7 +70,7 @@ while True:
     cv2.rectangle(img, (800, 70), (800 + 300, 70 + 100),
                   (50, 50, 50), 3)
     for button in buttonList:
-        button.draw(img)
+        button.img_show(img)
 
 
     # Обнаружение рук
@@ -82,7 +82,7 @@ while True:
         # Проверяем что нажал пользователь
         if length < 50 and delayCounter == 0:  # дистанция пальцев для клика!!!
             for i, button in enumerate(buttonList):
-                if button.checkClick(x, y):
+                if button.clicked(x, y):
                     myValue = buttonListValues[int(i % 4)][int(i / 4)]  # Проверяем какая кнопка была нажата
                     keyInput += str(myValue)
                     if len(keyInput) >= 6:
